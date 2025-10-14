@@ -174,7 +174,7 @@ id: What is the case name
 question: |
   What is the case name?
 subquestion: |
-  Please type the name of the case
+  Please type the name of the case (ex. Jane v. Doe)
 fields:
   - "Case name": case_name
 ---
@@ -200,6 +200,9 @@ question: |
   Fee information?
 subquestion: |
   You will need to pay a fee, request a fee waiver, or indicate that the appellant is the Commonwealth to file the Entry of Appeal form. 
+
+  To learn more about filing fees, please visit https://www.mass.gov/guides/electronic-filing-at-the-appeals-court#-payment-and-waiver-of-efilema.com-fees-
+  
 fields:
   - "Appellant is commonwealth": appellant_is_commonwealth
     datatype: yesno
