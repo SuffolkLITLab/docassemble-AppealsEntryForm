@@ -2,6 +2,7 @@
 include:
   - docassemble.AssemblyLine:assembly_line.yml
   - docassemble.MassAccess:massaccess.yml
+  - docassemble.MassAppealsCourt:appeals-basic-questions.yml
 ---
 metadata:
   title: >-
@@ -89,9 +90,9 @@ code: |
   user_ask_role = "plaintiff"
   users.gather()
   set_parts(subtitle=str(users))
-  #trial_court
+  trial_court
   docket_number
-  name_of_trial_court
+  #name_of_trial_court
   set_progress(25)
   case_name
   appellant_name
@@ -138,6 +139,7 @@ subquestion: |
   
   1. Submit a PDF of the form on eFileMA.com
   2. The completed form and any necessary fee or motion to waive the fee must be received within 14 days of your receipt of the notice of assembly from the clerk of the lower court. See Mass. R. A. P. 10(a)(1).
+  3. By submitting this form, you are certifying that you have served all other parties. To do so, give a copy of this form to all other parties to the case. 
 
   If you are looking to appeal your civil case, you can use this interview to create an entry of appeal form.
 
@@ -162,7 +164,7 @@ question: |
   This is not the right form for you
 subquestion: |
   % if not received_notice_of_assembly:
-   In order to use this form, you must have received a Notice of Assembly from the court. If you have not, your case is not ready to be appealed. 
+   In order to use this form, you must have received a Notice of Assembly from the court. If you have not, your case is not ready to be appealed. You may call the lower court to check on the status of the notice of assembly. 
   
   
   % endif
@@ -185,11 +187,13 @@ fields:
   - "Appellant name": appellant_name
 
 ---
-id: Name of trial court
-question: |
-  Please type the name of the trial court where you case was heard, as it appears on your court documents. 
-fields: 
-  - "Trial Court": name_of_trial_court
+id: trial_court 
+question: | 
+  Select the Trial Court department and division where your case was heard.
+fields:
+  - no label: trial_court
+    datatype: object
+    choices: all_courts
 ---
 id: Fee information
 question: |
