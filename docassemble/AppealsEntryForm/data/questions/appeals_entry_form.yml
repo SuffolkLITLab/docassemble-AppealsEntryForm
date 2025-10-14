@@ -17,7 +17,10 @@ metadata:
     
     Before you get started, please gather:
     
-    1. Your case information
+    1. The name of the trial court of the decision you are appealing 
+    2. Your trial court docket number 
+    3. The name of the case as it appears on the Notice of Assembly  
+    4. The Notice of Assembly from the trial court (specifically the date you received it)
     
     When you are finished, you will need to:
     
@@ -80,12 +83,15 @@ code: |
   # Set the allowed courts for this interview
   allowed_courts = ['Massachusetts Appeals Court', 'Other']
   nav.set_section("review_appeals_entry_form")
+  if not received_notice_of_assembly: 
+    kick_out_cannot_use
   user_role = "plaintiff"
   user_ask_role = "plaintiff"
   users.gather()
   set_parts(subtitle=str(users))
-  trial_court
+  #trial_court
   docket_number
+  name_of_trial_court
   set_progress(25)
   case_name
   appellant_name
@@ -123,7 +129,10 @@ subquestion: |
   
   Before you get started, please gather:
   
-  1. Your case information
+    1. The name of the trial court of the decision you are appealing 
+    2. The trial court docket number 
+    3. The name of the case as it appears on the Notice of Assembly  
+    4. The Notice of Assembly from the trial court (specifically the date you received it)
   
   When you are finished, you will need to:
   
@@ -133,6 +142,31 @@ subquestion: |
   If you are looking to appeal your civil case, you can use this interview to create an entry of appeal form.
 
   Most people take about 10 minutes to complete this interview.
+
+---
+id: right form
+question: |
+  To use this form, you must have received a {Notice of Assembly}. 
+fields: 
+  - Have you received a Notice of Assembly?: received_notice_of_assembly
+    datatype: yesnoradio
+terms: 
+  Notice of Assembly: |
+    A Notice of Assembly is a formal document that signals that the record of a case (the pleadings, transcripts, exhibits, and other papers from the trial court) has been collected and sent up to the appellate court.
+
+
+---
+event: kick_out_cannot_use
+id: kickout 
+question: |
+  This is not the right form for you
+subquestion: |
+  % if not received_notice_of_assembly:
+   In order to use this form, you must have received a Notice of Assembly from the court. If you have not, your case is not ready to be appealed. 
+  
+  
+  % endif
+
 ---
 id: What is the case name
 question: |
@@ -142,17 +176,26 @@ subquestion: |
 fields:
   - "Case name": case_name
 ---
-id: What the appellant s name
+id: What the appellant's name
 question: |
   What the appellant's name?
 subquestion: |
   If you are submitting this form on behalf of yourself, this is your name.
 fields:
   - "Appellant name": appellant_name
+
+---
+id: Name of trial court
+question: |
+  Please type the name of the trial court where you case was heard, as it appears on your court documents. 
+fields: 
+  - "Trial Court": name_of_trial_court
 ---
 id: Fee information
 question: |
   Fee information?
+subquestion: |
+  You will need to pay a fee, request a fee waiver, or indicate that the appellant is the Commonwealth to file the Entry of Appeal form. 
 fields:
   - "Appellant is commonwealth": appellant_is_commonwealth
     datatype: yesno
@@ -163,10 +206,13 @@ fields:
 ---
 id: Date notice of assembly was received
 question: |
-  Date notice of assembly was received?
+  Date {notice of assembly} was received?
 fields:
   - "Date of Notice of assembly received": notice_of_assembly_received_date
     datatype: date
+terms: 
+  notice of assembly: |
+    A Notice of Assembly is a formal document that signals that the record of a case (the pleadings, transcripts, exhibits, and other papers from the trial court) has been collected and sent up to the appellate court.
 ---
 id: preview appeals_entry_form
 question: |
