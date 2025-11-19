@@ -86,19 +86,27 @@ code: |
   nav.set_section("review_appeals_entry_form")
   if not received_notice_of_assembly: 
     kick_out_cannot_use
+  notice_of_assembly_received_date
   user_role = "plaintiff"
   user_ask_role = "plaintiff"
+  filer_role
   users.gather()
   set_parts(subtitle=str(users))
+
+  
+  if filer_role == 'pro_se':
+      appellant_name = users[0].name.full()
+  else:
+      appellant_name
+
   trial_court
   docket_number
-  #name_of_trial_court
   set_progress(25)
   case_name
-  appellant_name
+  #appellant_name
   appellant_is_commonwealth
   set_progress(50)
-  notice_of_assembly_received_date
+  certificate_of_service
   interview_order_appeals_entry_form = True
 ---
 ###################### Main order ######################
@@ -170,6 +178,28 @@ subquestion: |
   % endif
 
 ---
+id: who_is_filling_out_form
+question: |
+  Who is filling out this form?
+subquestion: |
+  Are you an attorney filling this form out on behalf of your client or are you filling this form out on behalf of yourself? 
+
+fields:
+  - I am: filer_role
+    datatype: radio
+    choices:
+      - An attorney representing my client: attorney
+      - Filling this out for myself: pro_se
+---
+id: What is the appellant's name
+question: |
+  What is the appellant's name?
+subquestion: |
+  Enter the name of the appellant in this appeal.
+fields:
+  - "Appellant name": appellant_name
+show if: filer_role == 'attorney'
+---
 id: What is the case name
 question: |
   What is the case name?
@@ -177,14 +207,6 @@ subquestion: |
   Please type the name of the case as it appears on your Notice of Assembly (ex. Jane v. Doe)
 fields:
   - "Case name": case_name
----
-id: What the appellant's name
-question: |
-  What the appellant's name?
-subquestion: |
-  If you are submitting this form on behalf of yourself, this is your name.
-fields:
-  - "Appellant name": appellant_name
 
 ---
 id: trial_court 
@@ -230,13 +252,23 @@ terms:
 ---
 id: Date notice of assembly was received
 question: |
-  Date {notice of assembly} was received?
+  When did you receieve the {notice of assembly}?
 fields:
-  - "Date of Notice of assembly received": notice_of_assembly_received_date
+  - "Date Notice of assembly received": notice_of_assembly_received_date
     datatype: date
 terms: 
   notice of assembly: |
     A Notice of Assembly is a formal document that signals that the record of a case (the pleadings, transcripts, exhibits, and other papers from the trial court) has been collected and sent up to the appellate court.
+
+---
+id: certificate_of_service
+question: |
+  Information on the certificate of service
+subquestion: |
+  All papers filed in the Appeals Court must be sent to all other parties to the case, or their attorney(s), and filed along with a Certificate of Service stating that you completed this step.  This is called "service," and can be done by email or regular mail.  
+  
+  If the Certificate of Service is not completed, this filing will not be accepted.  If you do not serve the other party or parties before filing documents in the Appeals Court, the filing may be struck and, if you are an appellant, the appeal may be dismissed.
+continue button field: certificate_of_service
 ---
 id: preview appeals_entry_form
 question: |
