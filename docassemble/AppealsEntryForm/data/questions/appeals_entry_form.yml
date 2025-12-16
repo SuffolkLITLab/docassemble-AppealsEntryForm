@@ -103,7 +103,7 @@ code: |
       appellant_name
 
   trial_court
-  docket_number
+  docket_num
   set_progress(25)
   case_name
   #appellant_name
@@ -210,6 +210,12 @@ subquestion: |
   Please type the name of the case as it appears on your Notice of Assembly (ex. Jane v. Doe)
 fields:
   - "Case name": case_name
+---
+id: docket_num 
+question: | 
+  What is the docket number for your case? 
+fields:
+  - "Docket Number": docket_num
 
 ---
 id: trial_court 
