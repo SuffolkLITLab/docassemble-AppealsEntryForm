@@ -217,7 +217,7 @@ id: docket_num
 question: | 
   What is the docket number for your case? 
 subquestion: |
-  You can use the [docket search](https://www.masscourts.org/eservices/home.page.2) to help find your trial court docket number
+  You can search for the trial court docket number [here](https://www.masscourts.org/eservices/home.page.2) 
 fields:
   - "Docket Number": docket_num
 
