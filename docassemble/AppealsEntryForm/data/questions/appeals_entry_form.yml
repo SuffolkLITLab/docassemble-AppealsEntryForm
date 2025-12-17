@@ -6,27 +6,27 @@ include:
 ---
 metadata:
   title: >-
-    Appeals entry form
+     Civil Appeals Entry Form
   short title: >-
-    Appeals entry form
+    Civil Appeals Entry form
   description: |-
     This interview helps someone in Massachusetts create a Civil Appeal Entry Form
   can_I_use_this_form: |
     If you are looking to appeal your civil case, you can use this interview to create an entry of appeal form.
   before_you_start: |
-    This interview will help you create the Civil Appeal Entry Form.
+    This interview will help you create the Civil Appeal Entry Form. This form is for use in civil appeals only and is used to docket a civil appeal pursuant to Mass. R. A. P. 10(a). 
     
     Before you get started, please gather:
     
     1. The name of the trial court of the decision you are appealing 
     2. Your trial court docket number (you can find this on your trial court documents)
     3. The name of the case as it appears on the Notice of Assembly  
-    4. The Notice of Assembly from the trial court (specifically the date you received it)
+    4. The Notice of Assembly from the trial court 
     
     When you are finished, you will need to:
     
     1. Submit a PDF of the form on eFileMA.com
-    2. The completed form and any necessary fee or motion to waive the fee must be received **within 14 days** of your receipt of the notice of assembly from the clerk of the lower court. See Mass. R. A. P. 10(a)(1).
+    2. The completed form and any necessary fee or motion to waive the fee- with Affidavit of Indigency- must be received **within 14 days** of your receipt of the notice of assembly from the clerk of the lower court. See Mass. R. A. P. 10(a)(1).
     3. By submitting this form, you are certifying that you have served all other parties. To do so, give a copy of this form to all other parties to the case. 
     
      If you are looking to appeal your civil case, you can use this interview to create an entry of appeal form. Read [this guide](https://www.mass.gov/info-details/entering-the-appeal-civil) to learn more about entering a civil appeal and review the [frequently asked questions](https://www.mass.gov/guides/appeals-court-frequent-appellate-process-questions) about the appeals process.
@@ -68,7 +68,7 @@ code: |
   github_repo_name =  'docassemble-AppealsEntryForm'
 ---
 code: |
-  interview_short_title = "Appeal Entry Form"
+  interview_short_title = "Civil Appeals Entry Form"
 ---
 code: |
   al_form_type = "appeal" 
@@ -104,10 +104,12 @@ code: |
 
   trial_court
   docket_num
+  filing_fee_option
   set_progress(25)
   case_name
   #appellant_name
-  appellant_is_commonwealth
+  #appellant_is_commonwealth
+  
   set_progress(50)
   certificate_of_service
   interview_order_appeals_entry_form = True
@@ -135,24 +137,24 @@ code: |
 id: Appeals_entry_form
 continue button field: appeals_entry_form_intro
 question: |
-  Appeals entry form
+  Civil Appeals Entry Form
 subquestion: |
-  This interview will help you create the Civil Appeal Entry Form.
-  
-  Before you get started, please gather:
-  
+  This interview will help you create the Civil Appeal Entry Form. This form is for use in civil appeals only and is used to docket a civil appeal pursuant to Mass. R. A. P. 10(a). 
+    
+    Before you get started, please gather:
+    
     1. The name of the trial court of the decision you are appealing 
-    2. The trial court docket number (you can find this on your trial court documents)
+    2. Your trial court docket number (you can find this on your trial court documents)
     3. The name of the case as it appears on the Notice of Assembly  
-    4. The Notice of Assembly from the trial court (specifically the date you received it)
-  
-  When you are finished, you will need to:
-  
-  1. Submit a PDF of the form on eFileMA.com
-  2. The completed form and any necessary fee or motion to waive the fee must be received **within 14 days** of your receipt of the notice of assembly from the clerk of the lower court. See Mass. R. A. P. 10(a)(1).
-  3. By submitting this form, you are certifying that you have served all other parties. To do so, give a copy of this form to all other parties to the case. 
-
-  If you are looking to appeal your civil case, you can use this interview to create an entry of appeal form. Read [this guide](https://www.mass.gov/info-details/entering-the-appeal-civil) to learn more about entering a civil appeal and review the [frequently asked questions](https://www.mass.gov/guides/appeals-court-frequent-appellate-process-questions) about the appeals process.
+    4. The Notice of Assembly from the trial court 
+    
+    When you are finished, you will need to:
+    
+    1. Submit a PDF of the form on eFileMA.com
+    2. The completed form and any necessary fee or motion to waive the fee- with Affidavit of Indigency- must be received **within 14 days** of your receipt of the notice of assembly from the clerk of the lower court. See Mass. R. A. P. 10(a)(1).
+    3. By submitting this form, you are certifying that you have served all other parties. To do so, give a copy of this form to all other parties to the case. 
+    
+     If you are looking to appeal your civil case, you can use this interview to create an entry of appeal form. Read [this guide](https://www.mass.gov/info-details/entering-the-appeal-civil) to learn more about entering a civil appeal and review the [frequently asked questions](https://www.mass.gov/guides/appeals-court-frequent-appellate-process-questions) about the appeals process.
 
   Most people take about 10 minutes to complete this interview.
 
@@ -165,7 +167,7 @@ fields:
     datatype: yesnoradio
 terms: 
   Notice of Assembly: |
-    A Notice of Assembly is a formal document that signals that the record of a case (the pleadings, transcripts, exhibits, and other papers from the trial court) has been collected and sent up to the appellate court.
+    A notice of assembly is a formal notice that signals the record of the case (the pleadings, exhibit list, and other papers from the Trial Court) have been collected and sent to the appellate court.
 
 
 ---
@@ -175,7 +177,7 @@ question: |
   This is not the right form for you
 subquestion: |
   % if not received_notice_of_assembly:
-   In order to use this form, you must have received a Notice of Assembly from the court. If you have not, your case is not ready to be appealed. You may call the lower court to check on the status of the notice of assembly. 
+   In order to use this form, you must have received a Notice of Assembly from the court. If you have not, your case is not ready to be entered in the Appeals Court. You may call the lower court to check on the status of the notice of assembly. 
   
   
   % endif
@@ -214,6 +216,8 @@ fields:
 id: docket_num 
 question: | 
   What is the docket number for your case? 
+subquestion: |
+  You can use the [docket search](https://www.masscourts.org/eservices/home.page.2) to help find your trial court docket number
 fields:
   - "Docket Number": docket_num
 
@@ -230,7 +234,7 @@ id: Fee information
 question: |
   Filing Fee Information
 subquestion: |
-  You will need to pay a fee, request a fee waiver, or indicate that the {appellant} is the Commonwealth to file the Entry of Appeal form. 
+  You will need to pay a fee or request a fee waiver to file the Civil Appeals Entry form. 
 
   **Filing Fee**: There is a $300 fee when filing a Civil Appeal Entry form. You will pay this fee when you e-file the form. To pay the fee, go to eFileMA.com and choose “Start a New Case.” When asked where to file, pick “Appeals Court – Panel (P-Docket).” Upload your Civil Appeals Entry Form and submit your payment.
 
@@ -240,21 +244,18 @@ subquestion: |
 
   Fill out the required case and party information. In the “Filings” dropdown, choose “Indigency motion to waive fees.” Upload your motion as the Lead Document, set the Security to “Public,” and save your changes. Then click “Add Another Filing,” choose “Indigency Affidavit,” upload your affidavit as a PDF, set the Security to “Impounded,” and save.
 
-  After uploading both the motion to waive the entry fee and supporting affidavit of indigency, continue to use the "Add Another Filing" button to add the Civil Appeal Entry form. 
-
-   **NOTE**: If the Commonwealth is the appellant in your case, then there will be no fee.  
-
+  After uploading both the motion to waive the entry fee and supporting affidavit of indigency, continue to use the "Add Another Filing" button to add the Civil Appeal Entry form.  
   To learn more about filing fees, please visit the [Electronic Filing at the Appeals Court Guide](https://www.mass.gov/guides/electronic-filing-at-the-appeals-court#-payment-and-waiver-of-efilema.com-fees-)
 
   Please indicate below how you will be handling the filing fee. 
   
 fields:
-  - "Appellant is Commonwealth": appellant_is_commonwealth
-    datatype: yesno
-  - "Fee waiver requested": fee_waiver_requested
-    datatype: yesno
-  - "Paying fee": paying_fee
-    datatype: yesno
+  - no label: filing_fee_option
+    datatype: radio 
+    choices: 
+      - Request a fee waiver: waiver
+      - Pay the filing fee: pay 
+
 terms: 
   appellant: |
     An appellant is the person who is appealing a decision—the one who lost in the lower court and is now asking a higher court to review or change that decision.
@@ -267,17 +268,22 @@ fields:
     datatype: date
 terms: 
   notice of assembly: |
-    A Notice of Assembly is a formal document that signals that the record of a case (the pleadings, transcripts, exhibits, and other papers from the trial court) has been collected and sent up to the appellate court.
+    A notice of assembly is a formal notice that signals the record of the case (the pleadings, exhibit list, and other papers from the Trial Court) have been collected and sent to the appellate court.
 
 ---
 id: certificate_of_service
 question: |
   Information on the certificate of service
 subquestion: |
-  All papers filed in the Appeals Court must be sent to all other parties to the case, or their attorney(s), and filed along with a Certificate of Service stating that you completed this step.  This is called "service," and can be done by email or regular mail.  
+  All papers filed in the Appeals Court, with the exception of an affidavit of indigency, must be sent to all other parties to the case, or their attorney(s), and filed along with a Certificate of Service stating that you completed this step. 
   
-  If the Certificate of Service is not completed, this filing will not be accepted.  If you do not serve the other party or parties before filing documents in the Appeals Court, the filing may be struck and, if you are an appellant, the appeal may be dismissed.
-continue button field: certificate_of_service
+  If the Certificate of Service is not completed, this filing will not be accepted. If you do not serve the other party or parties before filing documents in the Appeals Court, the filing may be struck and, if you are an appellant, the appeal may be dismissed.
+  
+  By checking the box below, you are certifying that you will serve a copy of the civil appeal entry form on all other parties to the case, or their attorney(s).  Service may be made through the electronic filing system or by conventional means. If you have a restraining order, you may not be able to mail filings to the other party. 
+
+field: certificate_of_service
+choices: 
+  - I certify that upon submittal, I have served all parties who are registered for electronic service through the electronic filing system and will serve all other parties conventionally.
 ---
 id: preview appeals_entry_form
 question: |
@@ -310,10 +316,10 @@ event: review_appeals_entry_form
 question: |
   Review your answers
 review:
-  - Edit: appellant_is_commonwealth
-    button: |
-      **Appellant is commonwealth**:
-      ${ word(yesno(appellant_is_commonwealth)) }
+  #- Edit: appellant_is_commonwealth
+   # button: |
+     # **Appellant is commonwealth**:
+      #${ word(yesno(appellant_is_commonwealth)) }
   - Edit: appellant_name
     button: |
       **Appellant name**:
@@ -340,14 +346,14 @@ review:
     button: |
       **Case name**:
       ${ case_name }
-  - Edit: fee_waiver_requested
-    button: |
-      **Fee waiver requested**:
-      ${ word(yesno(fee_waiver_requested)) }
-  - Edit: paying_fee
-    button: |
-      **Paying fee**:
-      ${ word(yesno(paying_fee)) }
+ # - Edit: fee_waiver_requested
+   # button: |
+    #  **Fee waiver requested**:
+    #  ${ word(yesno(fee_waiver_requested)) }
+ # - Edit: paying_fee
+  #  button: |
+   #   **Paying fee**:
+    #  ${ word(yesno(paying_fee)) }
   - Edit: docket_number
     button: |
       **Docket number**:
@@ -392,12 +398,12 @@ progress: 100
 ---
 # ALDocument objects specify the metadata for each template
 objects:
+  - appeals_entry_form_attachment: ALDocument.using(title="Civil Appeals Entry form", filename="appeals_entry_form", enabled=True, has_addendum=False, )
   - appeals_entry_form_Post_interview_instructions: ALDocument.using(title="Instructions", filename="appeals_entry_form_next_steps.docx", enabled=True, has_addendum=False)
-  - appeals_entry_form_attachment: ALDocument.using(title="Appeals entry form", filename="appeals_entry_form", enabled=True, has_addendum=False, )
 ---
 # Bundles group the ALDocuments into separate downloads, such as for court and for the user
 objects:
-  - al_user_bundle: ALDocumentBundle.using(elements=[appeals_entry_form_Post_interview_instructions, appeals_entry_form_attachment], filename="appeals_entry_form", title="All forms to download for your records", enabled=True)
+  - al_user_bundle: ALDocumentBundle.using(elements=[appeals_entry_form_attachment, appeals_entry_form_Post_interview_instructions], filename="appeals_entry_form", title="All forms to download for your records", enabled=True)
   - al_court_bundle: ALDocumentBundle.using(elements=[appeals_entry_form_attachment],  filename="appeals_entry_form", title="All forms to deliver to court", enabled=True)
 ---
 # Each attachment defines a key in an ALDocument. We use `i` as the placeholder here so the same template is 
