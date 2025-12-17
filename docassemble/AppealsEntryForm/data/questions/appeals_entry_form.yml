@@ -196,13 +196,13 @@ fields:
       - An attorney representing my client: attorney
       - Filling this out for myself: pro_se
 ---
-id: What is the appellant's name
+id: What is the client's name
 question: |
-  What is the appellant's name?
+  What is your client's name?
 subquestion: |
-  Enter the name of the appellant in this appeal.
+  Enter the name of your client in this appeal.
 fields:
-  - "Appellant name": appellant_name
+  - "Client name": appellant_name
 show if: filer_role == 'attorney'
 ---
 id: What is the case name
