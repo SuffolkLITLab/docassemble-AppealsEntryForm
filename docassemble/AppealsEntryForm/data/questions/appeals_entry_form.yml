@@ -262,7 +262,7 @@ terms:
 ---
 id: Date notice of assembly was received
 question: |
-  When did you receieve the {notice of assembly}?
+  When did you receive the {notice of assembly}?
 fields:
   - "Date Notice of assembly received": notice_of_assembly_received_date
     datatype: date
